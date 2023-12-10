@@ -22,8 +22,12 @@
 ## 4. GitHub Actions Workflow:
 
 * Created workflow file - **pipeline.yaml**</n> which will trigger on push or pull request event with appropiate caching to optimize workflow runs.
+### Explaination:
+* When someone make any change to code and push code to GitHub repo the workflow file automatically triggered.</n>
+* It start with checking all dependencies install all packages, then enters in Build stage do AWS login, Docker login</n>
+* After that it build docker image and push it to AWS ECR.
  
 ## 5. Security and Best Practices:
-* Use secret for storing AWS creadentials
+* Use Github secret for storing AWS creadentials
 
 ##
