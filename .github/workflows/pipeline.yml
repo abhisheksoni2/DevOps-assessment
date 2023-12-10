@@ -64,24 +64,24 @@ jobs:
           registry: ${{ steps.login-ecr.outputs.registry }}
       
       
-  #     - name: Get Tags for image
-  #       id: metadata
-  #       uses: docker/metadata-action@v4
-  #       with:
-  #         images: ${{ steps.login-ecr.outputs.registry }}/${{ github.event.repository.name }}
-  #         tags: |
-  #           type=raw,value=latest
-  #           type=raw,value=${{ github.ref_name }}
-  #           type=raw,value=${{ github.sha }}
-  #           type=ref,event=${{ github.ref_type }}
-  #           type=sha
+      - name: Get Tags for image
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/${{ github.event.repository.name }}
+          tags: |
+            type=raw,value=latest
+            type=raw,value=${{ github.ref_name }}
+            type=raw,value=${{ github.sha }}
+            type=ref,event=${{ github.ref_type }}
+            type=sha
       
-  #     - name: Build image and push
-  #       uses: docker/build-push-action@v4
-  #       with:
-  #         context: .
-  #         push: true
-  #         tags: ${{ steps.metadata.outputs.tags }}
-  #         cache-from: type=gha
-  #         cache-to: type=gha,mode=min
-  #         labels: ${{ steps.metadata.outputs.labels }}
+      - name: Build image and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=min
+          labels: ${{ steps.metadata.outputs.labels }}
