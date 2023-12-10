@@ -17,3 +17,71 @@ on:
     branches:
       - main
       - dev
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ./requirements.txt
+        
+        
+  # build:
+  #   name: Build and Push
+  #   runs-on: ubuntu-latest
+  #   needs: dependencies
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+            
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       env:
+  #           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  #       with:
+  #         role-to-assume: ${{ secrets.ECR_ROLE_ARN }}
+  #         role-session-name: Push-ECR
+  #         aws-region: ${{ secrets.ECR_REGION }}
+      
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
+      
+  #     - name: Docker login
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ${{ steps.login-ecr.outputs.registry }}
+      
+      
+  #     - name: Get Tags for image
+  #       id: metadata
+  #       uses: docker/metadata-action@v4
+  #       with:
+  #         images: ${{ steps.login-ecr.outputs.registry }}/${{ github.event.repository.name }}
+  #         tags: |
+  #           type=raw,value=latest
+  #           type=raw,value=${{ github.ref_name }}
+  #           type=raw,value=${{ github.sha }}
+  #           type=ref,event=${{ github.ref_type }}
+  #           type=sha
+      
+  #     - name: Build image and push
+  #       uses: docker/build-push-action@v4
+  #       with:
+  #         context: .
+  #         push: true
+  #         tags: ${{ steps.metadata.outputs.tags }}
+  #         cache-from: type=gha
+  #         cache-to: type=gha,mode=min
+  #         labels: ${{ steps.metadata.outputs.labels }}
