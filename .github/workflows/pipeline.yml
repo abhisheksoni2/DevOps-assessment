@@ -47,7 +47,7 @@ jobs:
         env:
             BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         with:
-          role-to-assume: arn:aws:iam::459030993315:user/abhiseksoni2
+          role-to-assume: arn:aws:iam::459030993315:role/Github-conn-role
           role-session-name: Push-ECR
           aws-region: us-east-1
       
