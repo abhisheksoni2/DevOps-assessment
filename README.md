@@ -28,6 +28,10 @@
 * After that it build docker image and push it to AWS ECR.
  
 ## 5. Security and Best Practices:
-* Use Github secret for storing AWS creadentials
+* Use Github secret for storing AWS creadentials.</n>
+* Used Achore-Engine for **scanning for vulnerabilities** in docker file. </n>
+* After sscanning image pushed to ECR.
 
-##
+## 6. Permission to given Account:
+* I provided the permission with required ecr policy to view the AWS ECR image
+* AWS official support link [AWS DOCS LINKS](https://repost.aws/knowledge-center/secondary-account-access-ecr) for the diffrent account permission to ECR.
