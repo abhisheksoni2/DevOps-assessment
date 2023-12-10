@@ -70,5 +70,6 @@ jobs:
           IMAGE_TAG: ${{ github.run_number }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          echo "DOcker image Scanning start..."
           curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- -r $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

@@ -33,5 +33,5 @@
 * After sscanning image pushed to ECR.
 
 ## 6. Permission to given Account:
-* I provided the permission with required ecr policy to view the AWS ECR image
-* AWS official support link [AWS DOCS LINKS](https://repost.aws/knowledge-center/secondary-account-access-ecr) for the diffrent account permission to ECR.
+* I provided the permission with required ecr policy to view the AWS ECR image.
+* Follow the AWS official support link [AWS DOCS LINKS](https://repost.aws/knowledge-center/secondary-account-access-ecr) for the diffrent account permission to ECR.
