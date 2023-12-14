@@ -1,5 +1,5 @@
 # DevOps Hiring Assignment: Automating Docker Image Upload to AWS ECR using GitHub Actions
-
+## Hello all
 ## Prerequisites:
 * AWS account with OIDC connect for Github
 * IAM permission to perform actions
