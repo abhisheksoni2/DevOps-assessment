@@ -22,6 +22,8 @@ FROM python:3.9-slim as runtime
 
 WORKDIR /run
 
+COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.11/site-packages
+
 COPY --from=build /app .
 
 RUN sh -c 'ls -l /run'
