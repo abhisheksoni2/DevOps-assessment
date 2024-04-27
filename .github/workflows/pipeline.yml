@@ -11,12 +11,12 @@ on:
     branches:
       - main
       - dev
-  push:
-    tags: 
-      - '*'
-    branches:
-      - main
-      - dev
+  # push:
+  #   tags: 
+  #     - '*'
+  #   branches:
+  #     - main
+  #     - dev
 
 jobs:
   Dependencies:
