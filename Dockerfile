@@ -1,5 +1,5 @@
 # Stage 1 : Build
-FROM python:3.9-slim as build
+FROM python:3.9 as build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -20,13 +20,13 @@ RUN sh -c 'ls -l /app'
 
 FROM python:3.9-slim as runtime
 
-WORKDIR /run
+WORKDIR /app
 
 COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.11/site-packages
 
 COPY --from=build /app .
 
-RUN sh -c 'ls -l /run'
+RUN sh -c 'ls -l /app'
 
 EXPOSE 5000
 
