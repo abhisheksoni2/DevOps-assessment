@@ -1,34 +1,32 @@
-# Stage 1 : Build
-FROM python:3.9 as build
+# Stage 1: Build stage
+FROM python:3.9-slim as builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file
+# Copy requirements.txt to the container
 COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools wheel
 
-RUN echo "Installing dependencies..."
+# Install dependencies
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# Install the project dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
+# Copy the application source code
 COPY . .
+RUN rm requirements.txt
 
-RUN sh -c 'ls -l /app'
-
-# Stage 2 : Runtime
-
-FROM python:3.9-slim as runtime
+# Stage 2: Production stage
+FROM builder
 
 WORKDIR /app
 
-COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.11/site-packages
+# Copy the installed dependencies from the previous stage
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 
-COPY --from=build /app .
+# Copy the application source code from the previous stage
+COPY --from=builder /app .
 
-RUN sh -c 'ls -l /app'
-
+# Expose port 5000
 EXPOSE 5000
 
-# Run the Flask application
-CMD ["python", "app.py"]
+CMD ["python","app.py"]
